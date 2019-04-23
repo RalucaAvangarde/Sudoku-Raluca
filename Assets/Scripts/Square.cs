@@ -30,7 +30,7 @@ public class Square
     }
     //Check if a number exists on a line
     //return true if find same number on the line else false
-    public bool CheckLine(int coordX,int coordY, int nrVerified)
+    public bool CheckLine(int nrVerified,int coordX,int coordY)
     {
         for (int i = 0; i < BoardSize; i++)
         {
@@ -45,11 +45,11 @@ public class Square
     }
     // Check if a number exists on a column
    // return true if find same number on the line else false
-    public bool CheckCol(int coordX, int coordY, int nrVerified)
+    public bool CheckCol(int nrVerified,int coordX, int coordY)
     {
         for (int i = 0; i < BoardSize; i++)
         {
-            if (MySquare[coordX, i] == nrVerified && i != coordY)
+            if ((i != coordY) && MySquare[coordX, i] == nrVerified  )
             { 
                 return false;
             }
@@ -83,7 +83,7 @@ public class Square
     }
 
     // Check if a number can be placed: check column, check line, check insideSquare
-    public bool CheckIfCanPlaceNumber(int coordX, int coordY, int number)
+    public bool CheckIfCanPlaceNumber(int number,int coordX, int coordY)
     {
         return CheckCol(number, coordX, coordY) && CheckLine(number, coordX, coordY)
                      && CheckIn3x3Square(number, coordX, coordY);

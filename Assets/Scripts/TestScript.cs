@@ -17,8 +17,8 @@ public class TestScript : MonoBehaviour
             for (int j = 0; j < 9; j++)
             {
                 //Debug.Log(GetBoard()[i, j] + " ");
-                MyText.text = GetBoard()[i, j].ToString();
-                Instantiate(MyText, parentText);
+               // MyText.text = GetBoard()[i, j].ToString();
+                //Instantiate(MyText, parentText);
             }
             
         }
@@ -31,8 +31,8 @@ public class TestScript : MonoBehaviour
             foreach (var item in sol)
             {
                 Debug.Log(item);
-                //MyText.text = item.ToString();
-                //Instantiate(MyText, parentText);
+                MyText.text = item.ToString();
+                Instantiate(MyText, parentText);
             }
         }
 
