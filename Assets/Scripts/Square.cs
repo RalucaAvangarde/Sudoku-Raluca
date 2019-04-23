@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Square : MonoBehaviour
+public class Square 
 {
     public int[,] MySquare { get; set; }
     public int BoardSize { get; set; }
 
-    public void Start()
-    {
-       // Table();
-    }
+   
     public Square()
     {
         BoardSize = 9;
@@ -31,20 +28,23 @@ public class Square : MonoBehaviour
 
         }
     }
-
+    //Check if a number exists on a line
+    //return true if find same number on the line else false
     public bool CheckLine(int coordX,int coordY, int nrVerified)
     {
         for (int i = 0; i < BoardSize; i++)
         {
-            if (MySquare[i, coordY] == nrVerified && i!=coordX)
+            if (MySquare[i, coordY] == nrVerified && (i!=coordX))
             {  
                 return false;
             }
+            
         }
-        Debug.Log("");
+       
         return true;
     }
-
+    // Check if a number exists on a column
+   // return true if find same number on the line else false
     public bool CheckCol(int coordX, int coordY, int nrVerified)
     {
         for (int i = 0; i < BoardSize; i++)
@@ -58,7 +58,37 @@ public class Square : MonoBehaviour
         return true;
     }
 
-   
+
+    // Check if a number exists in a 3x3 square
+    //return true if find same number in the 3x3 square else false
+    public bool CheckIn3x3Square(int number, int coordX, int coordY)
+    {
+       
+        int xStart = coordX / 3 * 3;
+
+        int yStart = coordY / 3 * 3;
+
+
+        for (int i = xStart; i < xStart + 3; i++)
+        {
+            for (int j = yStart; j < yStart + 3; j++)
+            {
+                if ((i != coordX) && (j != coordY) && (MySquare[i, j] == number))
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // Check if a number can be placed: check column, check line, check insideSquare
+    public bool CheckIfCanPlaceNumber(int coordX, int coordY, int number)
+    {
+        return CheckCol(number, coordX, coordY) && CheckLine(number, coordX, coordY)
+                     && CheckIn3x3Square(number, coordX, coordY);
+    }
+    
 
     public void Table()
     {
@@ -66,7 +96,7 @@ public class Square : MonoBehaviour
         {
             for (int j = 0; j < 9; j++)
             {
-                Debug.Log(MySquare[i,j]);
+                //Debug.Log(MySquare[i,j]);
             }
             
         }
