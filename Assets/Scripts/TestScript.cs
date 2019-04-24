@@ -35,8 +35,8 @@ public class TestScript : MonoBehaviour
             foreach (var item in sol)
             {
                 Debug.Log(item);
-                MyText1.text = item.ToString();
-                Instantiate(MyText1, parentText1);
+                //MyText1.text = item.ToString();
+                //Instantiate(MyText1, parentText1);
             }
         }
 
@@ -63,8 +63,8 @@ public class TestScript : MonoBehaviour
              for (int j = 0; j < 9; j++)
              {
                  //Debug.Log(sol1[i, j] + " ");
-                MyText.text = y.MySquare[i, j].ToString();
-                Instantiate(MyText, parentText);
+                //MyText.text = y.MySquare[i, j].ToString();
+               // Instantiate(MyText, parentText);
             }
 
          }

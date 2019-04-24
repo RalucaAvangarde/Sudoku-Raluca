@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class JsonUtils 
 {
-    private string fileName = "sudokuFile.json";
+    private string fileName = "Sudoku.json";
     private string filePath;
     public SudokuData DefaultElements;
 
