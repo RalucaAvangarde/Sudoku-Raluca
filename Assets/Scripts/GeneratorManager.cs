@@ -15,23 +15,6 @@ public class GeneratorManager
         SolveTable = new SudokuSolver();
     }
 
-    /* private int generateRandomNumber(int min, int max)
-     {
-         int number = 0;
-         var rand = new System.Random();
-         bool continueFind = true;
-         while (continueFind == true)
-         {
-             number = rand.Next(min, max);
-             if (!LastRandom.Skip(LastRandom.Count - 3).Take(3).Contains(number))
-             {
-                 LastRandom.Add(number);
-                 return number;
-             }
-         }
-         return number;
-     }*/
-
     private int GetNumberOfNotNullElements(int[,] table)
     {
         int count = 0;
@@ -74,14 +57,13 @@ public class GeneratorManager
     
     private int[,] RemoveElements(int[,] solution, int filledCells)
     {
-        var count = filledCells;
+        //var count = filledCells;
 
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
             {
-                //System.Threading.Thread.Sleep(10);
-                var rand = new Random().Next(0, 2);
+                var rand = UnityEngine.Random.Range(0, 2);
                 if (rand == 1)
                 {
                     solution[i, j] = 0;

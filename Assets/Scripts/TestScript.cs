@@ -5,13 +5,15 @@ using UnityEngine.UI;
 
 public class TestScript : MonoBehaviour
 {
+   
     public Text MyText;
     public Transform parentText;
-    
+    public List<int> lst = new List<int>();
     // Start is called before the first frame update
     void Start()
 
-    { 
+    {
+      
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -43,25 +45,12 @@ public class TestScript : MonoBehaviour
          {
              for (int j = 0; j < 9; j++)
              {
-                 Debug.Log(y.MySquare[i, j] + " ");
+                //Debug.Log(y.MySquare[i, j] + " ");
                 MyText.text = y.MySquare[i, j].ToString();
                 Instantiate(MyText, parentText);
             }
 
          }
-
-       /* solver = new SudokuSolver(y);
-         solver.Solve();
-         sol = solver.firstSolution;
-         for (int i = 0; i < 9; i++)
-         {
-             for (int j = 0; j < 9; j++)
-             {
-                 Debug.Log(sol[i, j] + " ");
-
-             }
-
-         }*/
     }
 
     private static int[,] GetBoard()

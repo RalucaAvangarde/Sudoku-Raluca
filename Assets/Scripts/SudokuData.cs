@@ -1,18 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class SudokuData : MonoBehaviour
+[Serializable]
+public class SudokuData 
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public List<SudokuList> Tables;
+}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+[Serializable]
+public class SudokuList
+{
+    public List<int> MyList;
 }
