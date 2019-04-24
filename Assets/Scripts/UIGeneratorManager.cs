@@ -4,42 +4,49 @@ using UnityEngine.UI;
 
 public class UIGeneratorManager : MonoBehaviour
 {
-    private GeneratorManager myGenerator;
-    private JsonUtils utils;
+   
     [SerializeField]
     private Text numbers;
     [SerializeField]
     private Transform container;
-    private Square gen;
+    private GenerateTableController generateTableController;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-       // utils = new JsonUtils();
-        myGenerator = new GeneratorManager();
-        DisplaySolution();
-        
+        generateTableController = new GenerateTableController();
     }
-    public void DisplaySolution()
+
+    public void DisplayGeneratedSolution()
     {
-         gen = myGenerator.GenerateTable(15,null);
+        ClearContainer();
+        var table = generateTableController.GenerateNewTable();
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
             {
-                numbers.text = gen.MySquare[i,j].ToString();
-                Instantiate(numbers, container);
+                numbers.text = table.MySquare[i,j].ToString();
+                if (table.MySquare[i, j] > 0)
+                {
+                    numbers.color = Color.red;
+                    Instantiate(numbers, container);
+                }
+                else {
+                    numbers.color = Color.black;
+                    Instantiate(numbers, container); }
+                
                
             }
         }
         
     }
 
-    public void SaveToJson()
+    public void ClearContainer()
     {
-        var elements = new List<SudokuList>();
-        gen.ConvertToList();
-        utils.DefaultElements.Tables= elements;
-        utils.SaveData();
+        foreach (Transform item in container)
+        {
+            Destroy(item.gameObject);
+        }
     }
+
+   
 }

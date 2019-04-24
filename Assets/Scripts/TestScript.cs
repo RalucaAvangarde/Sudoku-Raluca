@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class TestScript : MonoBehaviour
 {
    
-    public Text MyText;
-    public Text MyText1;
-    public Transform parentText;
-    public Transform parentText1;
+   // public Text MyText;
+   
+    //public Transform parentText;
+  
     public List<int> lst = new List<int>();
     // Start is called before the first frame update
     void Start()
