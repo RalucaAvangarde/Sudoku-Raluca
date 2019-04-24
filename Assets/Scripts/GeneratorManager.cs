@@ -6,7 +6,6 @@ using System.Linq;
 public class GeneratorManager
 {
     public Square NewTable { get; set; }
-    private List<int> LastRandom = new List<int>();
     public SudokuSolver SolveTable { get; set; }
 
     public GeneratorManager()
@@ -14,7 +13,11 @@ public class GeneratorManager
         NewTable = new Square();
         SolveTable = new SudokuSolver();
     }
-
+    /// <summary>
+    /// Count all not null numbers from table 
+    /// </summary>
+    /// <param name="table"></param>
+    /// <returns></returns>
     private int GetNumberOfNotNullElements(int[,] table)
     {
         int count = 0;
@@ -54,11 +57,15 @@ public class GeneratorManager
             return new Square(new int[9, 9], 9);
         }
     }
-    
+    /// <summary>
+    /// Remove random numbers from table
+    /// </summary>
+    /// <param name="solution"></param>
+    /// <param name="filledCells"></param>
+    /// <returns></returns>
     private int[,] RemoveElements(int[,] solution, int filledCells)
     {
-        //var count = filledCells;
-
+   
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)

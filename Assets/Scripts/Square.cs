@@ -91,7 +91,7 @@ public class Square
 
 
     /// <summary>
-    /// Convert Square to a List 
+    /// Convert 2D array  to a List 
     /// </summary>
     /// <returns>List<int></returns>
     public List<int> ConvertToList()

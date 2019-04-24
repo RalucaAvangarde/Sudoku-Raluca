@@ -1,32 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
-public class JsonUtils : MonoBehaviour
+public class JsonUtils 
 {
     private string fileName = "sudokuFile.json";
     private string filePath;
     public SudokuData DefaultElements;
 
-    public void Awake()
+   
+    public JsonUtils()
     {// filePath = Path.Combine(Application.persistentDataPath, "SudokuFile.json");
 
         DefaultElements = new SudokuData();
         filePath = Application.persistentDataPath + "/" + fileName;
-        Debug.Log(filePath + "Json path");
+        Debug.Log(filePath);
         ReadData();
     }
 
     /// <summary>
-    /// Save data in products file
+    /// Save data in  file
     /// </summary>
     public void SaveData()
     {
         string contents = JsonUtility.ToJson(DefaultElements, true);
         File.WriteAllText(filePath, contents);
     }
-
+    /// <summary>
+    /// Read data from json file
+    /// </summary>
     public void ReadData()
     {
 
@@ -38,7 +42,11 @@ public class JsonUtils : MonoBehaviour
         }
         else
         {
-            Debug.Log("Unable to read default input file");
+            var temp = new SudokuData();
+            temp.Tables = new List<SudokuList>();
+            temp.Tables.Add(new SudokuList() { MyList = Enumerable.Repeat(0, 81).ToList() });
+            DefaultElements = temp;
+            SaveData();
 
         }
     }

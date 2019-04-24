@@ -8,7 +8,6 @@ public class SudokuSolver
     public int[,] firstSolution;
 
     public Square MyTable { get; set; }
-
     public Square Solution { get; set; }
 
 
