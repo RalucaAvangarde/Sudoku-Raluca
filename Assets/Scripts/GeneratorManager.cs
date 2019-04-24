@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -6,39 +7,39 @@ public class GeneratorManager
 {
     public Square NewTable { get; set; }
     private List<int> LastRandom = new List<int>();
-    public SudokuSolver MySudokuTable { get; set; }
+    public SudokuSolver SolveTable { get; set; }
 
     public GeneratorManager()
     {
         NewTable = new Square();
-        MySudokuTable = new SudokuSolver(NewTable);
+        SolveTable = new SudokuSolver();
     }
 
-    private int generateRandomNumber(int min, int max)
-    {
-        int number = 0;
-        var rand = new System.Random();
-        bool continueFind = true;
-        while (continueFind == true)
-        {
-            number = rand.Next(min, max);
-            if (!LastRandom.Skip(LastRandom.Count - 3).Take(3).Contains(number))
-            {
-                LastRandom.Add(number);
-                return number;
-            }
-        }
-        return number;
-    }
+    /* private int generateRandomNumber(int min, int max)
+     {
+         int number = 0;
+         var rand = new System.Random();
+         bool continueFind = true;
+         while (continueFind == true)
+         {
+             number = rand.Next(min, max);
+             if (!LastRandom.Skip(LastRandom.Count - 3).Take(3).Contains(number))
+             {
+                 LastRandom.Add(number);
+                 return number;
+             }
+         }
+         return number;
+     }*/
 
-    private int GetNumberOfNotNullElements()
+    private int GetNumberOfNotNullElements(int[,] table)
     {
         int count = 0;
-        for (int i = 0; i < NewTable.BoardSize; i++)
+        for (int i = 0; i < 9; i++)
         {
-            for (int j = 0; j < NewTable.BoardSize; j++)
+            for (int j = 0; j < 9; j++)
             {
-                if (NewTable.MySquare[i, j] != 0)
+                if (table[i, j] != 0)
                 {
                     count++;
                 }
@@ -47,31 +48,58 @@ public class GeneratorManager
         return count;
     }
 
-    //generate table with nr of elements
-    public Square GenerateTable(int filledCells)
+   
+    public Square GenerateTable(int filledCells, int[,] baseTable = null)
     {
-        var goodSolution = false;
-
-        while (goodSolution != true)
+        if (baseTable == null)
         {
-            NewTable.MySquare = new int[9, 9];
-            int index = 0;
-            while (index < filledCells)
-            {
-                NewTable.MySquare[generateRandomNumber(1, 8), generateRandomNumber(1, 8)] = generateRandomNumber(1, 8);
+            baseTable = new int[9, 9];
+        }
 
-                index = GetNumberOfNotNullElements();
-            }
-            if (MySudokuTable.IsSolvable())
+        SolveTable.MyTable = new Square(baseTable, 9);
+
+        if (SolveTable.IsSolvable() == true) //base table is solved
+        {
+            SolveTable.Solve();
+            var solution = SolveTable.firstSolution;
+            int[,] generatedTable = RemoveElements(solution, filledCells);
+            NewTable = new Square(generatedTable, 9);
+            return NewTable;
+        }
+        else //base is not solvable
+        {
+            return new Square(new int[9, 9], 9);
+        }
+    }
+    
+    private int[,] RemoveElements(int[,] solution, int filledCells)
+    {
+        var count = filledCells;
+
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
             {
-                goodSolution = true;
-                return NewTable;
+                //System.Threading.Thread.Sleep(10);
+                var rand = new Random().Next(0, 2);
+                if (rand == 1)
+                {
+                    solution[i, j] = 0;
+
+                    if (GetNumberOfNotNullElements(solution) <= filledCells)
+                    {
+                        return solution;
+                    }
+
+                }
             }
         }
-        return NewTable;
-
+        if (GetNumberOfNotNullElements(solution) > filledCells)
+        {
+            return RemoveElements(solution, filledCells);
+        }
+        return solution;
     }
-
 }
 
 

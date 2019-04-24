@@ -30,26 +30,27 @@ public class TestScript : MonoBehaviour
             var sol = solver.firstSolution;
             foreach (var item in sol)
             {
-                Debug.Log(item);
-                MyText.text = item.ToString();
-                Instantiate(MyText, parentText);
+                //Debug.Log(item);
+                //MyText.text = item.ToString();
+                //Instantiate(MyText, parentText);
             }
         }
 
         Debug.Log("----------------------------------------");
-        /*  var y = new GeneratorManager().GenerateTable(0);
+         var y = new GeneratorManager().GenerateTable(15, GetBoard());
 
          for (int i = 0; i < 9; i++)
          {
              for (int j = 0; j < 9; j++)
              {
-                 //Debug.Log(y.MySquare[i, j] + " ");
-
-             }
+                 Debug.Log(y.MySquare[i, j] + " ");
+                MyText.text = y.MySquare[i, j].ToString();
+                Instantiate(MyText, parentText);
+            }
 
          }
 
-        solver = new SudokuSolver(y);
+       /* solver = new SudokuSolver(y);
          solver.Solve();
          sol = solver.firstSolution;
          for (int i = 0; i < 9; i++)

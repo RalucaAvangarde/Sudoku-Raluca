@@ -22,11 +22,16 @@ public class SudokuSolver
         MyTable = sudokuBoard;
     }
 
+    public SudokuSolver()
+    {
+    }
+
 
     // place a number at x,y coord in sudoku table
     //bool if number was placed succesfully else false
     private bool SolveCell(int coordX, int coordY)
     {
+       
         for (int i = 1; i <= 9; i++)
         {
             if (MyTable.CheckIfCanPlaceNumber(i, coordX, coordY))
