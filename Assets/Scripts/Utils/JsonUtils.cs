@@ -4,34 +4,28 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class JsonUtils 
+public static class JsonUtils 
 {
-    private string fileName = "Sudoku.json";
-    private string filePath;
-    public SudokuData DefaultElements;
+    private static string fileName = "Sudoku.json";
+    private static string filePath;
+    public static SudokuData DefaultElements = new SudokuData();
 
-   
-    public JsonUtils()
-    {
-        DefaultElements = new SudokuData();
-        filePath = Application.persistentDataPath + "/" + fileName;
-        ReadData();
-    }
 
     /// <summary>
     /// Save data in  file
     /// </summary>
-    public void SaveData()
+    public static void SaveData()
     {
         string contents = JsonUtility.ToJson(DefaultElements, true);
+        filePath = Application.persistentDataPath + "/" + fileName;
         File.WriteAllText(filePath, contents);
     }
     /// <summary>
     /// Read data from json file
     /// </summary>
-    public void ReadData()
+    public static void ReadData()
     {
-
+        filePath = Application.persistentDataPath + "/" + fileName;
         if (File.Exists(filePath))
         {
             string contents = File.ReadAllText(filePath);

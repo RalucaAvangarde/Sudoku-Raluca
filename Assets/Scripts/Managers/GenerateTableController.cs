@@ -5,13 +5,7 @@ using UnityEngine;
 public class GenerateTableController
 {
     private  GeneratorManager myGenerator;
-    private  JsonUtils utils;
 
-    public GenerateTableController()
-    {
-       
-        utils = new JsonUtils();
-    }
 
     public Square GenerateNewTable()
     {

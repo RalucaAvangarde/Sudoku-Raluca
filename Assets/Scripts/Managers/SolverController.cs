@@ -5,17 +5,17 @@ using UnityEngine;
 public class SolverController 
 {
     private SudokuSolver solver;
-    private JsonUtils utils;
 
     public SolverController()
     {
         solver = new SudokuSolver();
-        utils = new JsonUtils();
+        JsonUtils.ReadData();
+        
     }
 
     public Square GetTableByID(int id)
     {
-        return new Square().ConvertToMatrix(utils.DefaultElements.Tables[id].MyList);
+        return new Square().ConvertToMatrix(JsonUtils.DefaultElements.Tables[id].MyList);
     }
 
     public Square SolveTable(Square table)
@@ -27,7 +27,7 @@ public class SolverController
 
     public int GetTablesCount()
     {
-        return utils.DefaultElements.Tables.Count;
+        return JsonUtils.DefaultElements.Tables.Count;
     }
 
 }

@@ -7,14 +7,13 @@ public class GeneratorManager
 {
     public Square NewTable { get; set; }
     public SudokuSolver SolveTable { get; set; }
-    private JsonUtils utils;
 
 
     public GeneratorManager()
     {
         NewTable = new Square();
         SolveTable = new SudokuSolver();
-        utils = new JsonUtils();
+        JsonUtils.ReadData();
     }
     /// <summary>
     /// Count all not null numbers from table 
@@ -55,8 +54,8 @@ public class GeneratorManager
             var solution = SolveTable.firstSolution;
             int[,] generatedTable = RemoveElements(solution, filledCells);
             NewTable = new Square(generatedTable, 9);
-            utils.DefaultElements.Tables.Add(new SudokuList() { MyList = NewTable.ConvertToList() });
-            utils.SaveData();
+            JsonUtils.DefaultElements.Tables.Add(new SudokuList() { MyList = NewTable.ConvertToList() });
+            JsonUtils.SaveData();
             return NewTable;
         }
         else //base is not solvable
