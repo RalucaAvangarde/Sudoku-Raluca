@@ -12,11 +12,9 @@ public class JsonUtils
 
    
     public JsonUtils()
-    {// filePath = Path.Combine(Application.persistentDataPath, "SudokuFile.json");
-
+    {
         DefaultElements = new SudokuData();
         filePath = Application.persistentDataPath + "/" + fileName;
-        Debug.Log(filePath);
         ReadData();
     }
 

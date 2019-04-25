@@ -8,6 +8,8 @@ public class GeneratorManager
     public Square NewTable { get; set; }
     public SudokuSolver SolveTable { get; set; }
     private JsonUtils utils;
+
+
     public GeneratorManager()
     {
         NewTable = new Square();
@@ -41,6 +43,8 @@ public class GeneratorManager
         if (baseTable == null)
         {
             baseTable = new int[9, 9];
+            baseTable[0, UnityEngine.Random.Range(0, 9)] = UnityEngine.Random.Range(0,9);
+            
         }
 
         SolveTable.MyTable = new Square(baseTable, 9);

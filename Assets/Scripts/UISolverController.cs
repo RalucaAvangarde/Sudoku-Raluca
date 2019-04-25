@@ -45,6 +45,7 @@ public class UISolverController : MonoBehaviour
 
     public void DisplaySolution()
     {
+        mySolver = new SolverController();
         DisplayTable(mySolver.SolveTable(tableFromJson), solverParent);
     }
 

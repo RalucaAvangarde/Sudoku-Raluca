@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UIGeneratorManager : MonoBehaviour
 {
-   
+
     [SerializeField]
     private Text numbers;
     [SerializeField]
@@ -24,20 +24,22 @@ public class UIGeneratorManager : MonoBehaviour
         {
             for (int j = 0; j < 9; j++)
             {
-                numbers.text = table.MySquare[i,j].ToString();
+                numbers.text = table.MySquare[i, j].ToString();
                 if (table.MySquare[i, j] > 0)
                 {
                     numbers.color = Color.red;
                     Instantiate(numbers, container);
                 }
-                else {
+                else
+                {
                     numbers.color = Color.black;
-                    Instantiate(numbers, container); }
-                
-               
+                    Instantiate(numbers, container);
+                }
+
+
             }
         }
-        
+
     }
 
     public void ClearContainer()
@@ -48,5 +50,5 @@ public class UIGeneratorManager : MonoBehaviour
         }
     }
 
-   
+
 }
